@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoFinds - Sustainable Marketplace API</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 3rem;
+    }
+    
+    .header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .endpoint-list {
+      list-style: none;
+    }
+    
+    .endpoint-list li {
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      background: #f8fafc;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+    
+    .endpoint-list li:hover {
+      background: #e2e8f0;
+    }
+    
+    .method {
+      font-weight: bold;
+      color: #667eea;
+      margin-right: 1rem;
+    }
+    
+    .method.get { color: #10b981; }
+    .method.post { color: #f59e0b; }
+    .method.put { color: #3b82f6; }
+    .method.delete { color: #ef4444; }
+    
+    .footer {
+      text-align: center;
+      color: white;
+      opacity: 0.8;
+      padding: 2rem 0;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: #667eea;
+      color: white;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>EcoFinds API</h1>
+      <p>Sustainable Marketplace Backend Server</p>
+    </div>
+    
+    <div class="card">
+      <div class="status">
+        <div class="status-indicator"></div>
+        <h3>API Status: Online</h3>
+      </div>
+      <p>Welcome to the EcoFinds API server. This is a comprehensive backend solution for a sustainable second-hand marketplace platform.</p>
+    </div>
+    
+    <div class="grid">
+      <div class="card">
+        <h3>🔐 Authentication</h3>
+        <ul class="endpoint-list">
+          <li><span class="method post">POST</span>/api/auth/register</li>
+          <li><span class="method post">POST</span>/api/auth/login</li>
+          <li><span class="method post">POST</span>/api/auth/refresh-token</li>
+          <li><span class="method get">GET</span>/api/auth/profile</li>
+          <li><span class="method post">POST</span>/api/auth/logout</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <h3>👥 Users</h3>
+        <ul class="endpoint-list">
+          <li><span class="method get">GET</span>/api/users <span class="badge">Admin</span></li>
+          <li><span class="method get">GET</span>/api/users/stats <span class="badge">Admin</span></li>
+          <li><span class="method get">GET</span>/api/users/:id</li>
+          <li><span class="method put">PUT</span>/api/users/:id</li>
+          <li><span class="method delete">DELETE</span>/api/users/:id</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <h3>📦 Products</h3>
+        <ul class="endpoint-list">
+          <li><span class="method get">GET</span>/api/products</li>
+          <li><span class="method get">GET</span>/api/products/:id</li>
+          <li><span class="method post">POST</span>/api/products <span class="badge">Seller</span></li>
+          <li><span class="method put">PUT</span>/api/products/:id <span class="badge">Seller</span></li>
+          <li><span class="method delete">DELETE</span>/api/products/:id <span class="badge">Seller</span></li>
+          <li><span class="method get">GET</span>/api/products/categories</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <h3>🛒 Shopping Cart</h3>
+        <ul class="endpoint-list">
+          <li><span class="method get">GET</span>/api/cart</li>
+          <li><span class="method post">POST</span>/api/cart/add</li>
+          <li><span class="method put">PUT</span>/api/cart/:product_id</li>
+          <li><span class="method delete">DELETE</span>/api/cart/:product_id</li>
+          <li><span class="method delete">DELETE</span>/api/cart</li>
+          <li><span class="method get">GET</span>/api/cart/count</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <h3>📋 Orders</h3>
+        <ul class="endpoint-list">
+          <li><span class="method post">POST</span>/api/orders</li>
+          <li><span class="method get">GET</span>/api/orders</li>
+          <li><span class="method get">GET</span>/api/orders/:id</li>
+          <li><span class="method put">PUT</span>/api/orders/:id/status</li>
+          <li><span class="method get">GET</span>/api/orders/stats</li>
+          <li><span class="method get">GET</span>/api/orders/recent</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <h3>🎯 Recommendations</h3>
+        <ul class="endpoint-list">
+          <li><span class="method get">GET</span>/api/recommendations/personalized</li>
+          <li><span class="method get">GET</span>/api/recommendations/trending</li>
+          <li><span class="method get">GET</span>/api/recommendations/category/:category</li>
+          <li><span class="method get">GET</span>/api/recommendations/similar/:product_id</li>
+          <li><span class="method get">GET</span>/api/recommendations/preferences</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <h3>⛓️ Blockchain</h3>
+        <ul class="endpoint-list">
+          <li><span class="method get">GET</span>/api/blockchain/network-status</li>
+          <li><span class="method get">GET</span>/api/blockchain/ownership/:id/history</li>
+          <li><span class="method get">GET</span>/api/blockchain/ownership/:id/verify</li>
+          <li><span class="method post">POST</span>/api/blockchain/ownership</li>
+          <li><span class="method post">POST</span>/api/blockchain/ownership/:id/transfer</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <h3>🔧 System</h3>
+        <ul class="endpoint-list">
+          <li><span class="method get">GET</span>/api/health</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>🚀 Getting Started</h3>
+      <p><strong>Environment Setup:</strong> Copy <code>.env.example</code> to <code>.env</code> and configure your database and JWT secrets.</p>
+      <br>
+      <p><strong>Database Setup:</strong> Run <code>npm run migrate</code> to create the database schema and sample data.</p>
+      <br>
+      <p><strong>Development:</strong> Use <code>npm run dev</code> to start the development server with auto-reload.</p>
+      <br>
+      <p><strong>Authentication:</strong> Include <code>Authorization: Bearer &lt;token&gt;</code> header for protected endpoints.</p>
+    </div>
+    
+    <div class="footer">
+      <p>&copy; 2024 EcoFinds API - Sustainable Marketplace Platform</p>
+      <p>Built with Node.js, Express, MySQL, and JWT Authentication</p>
+    </div>
+  </div>
+</body>
+</html>
